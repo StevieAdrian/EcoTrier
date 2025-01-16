@@ -5,4 +5,11 @@ export type RootStackParamList = {
     AllCategories: undefined;
 };
 
+export interface WasteCategory {
+    id: string;
+    name: string;
+    icon: any;
+    description: string;
+}
+
 export type NavigationProp = StackNavigationProp<RootStackParamList>;
