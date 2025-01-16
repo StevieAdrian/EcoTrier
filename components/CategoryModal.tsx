@@ -13,7 +13,6 @@ const CategoryModal: React.FC<CategoryModalProps> = ({ visible, category, onClos
         <Modal visible={visible} animationType="fade" transparent>
             <View style={{ flex: 1, backgroundColor: "rgba(0, 0, 0, 0.5)", justifyContent: "center", alignItems: "center" }}>
                 <View style={{ width: "85%", backgroundColor: "#FFFFFF", borderRadius: 12, padding: 20, shadowColor: "#000", shadowOpacity: 0.2, shadowRadius: 4, elevation: 5 }}>
-                    
                     <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
                         <Text style={{ fontSize: 22, fontWeight: "bold" }}>{category?.name}</Text>
                         <TouchableOpacity onPress={onClose}>
