@@ -15,18 +15,18 @@ export default function ScanHistory({ navigation }: prop) {
 
     return (
         <View style={{flex: 1, backgroundColor: "white"}}>
-            <BalanceCard />
-            <Text style={{ fontWeight: "800", fontSize: 20, margin: 10 }}>Scan History</Text>
-            
-            {loading ? (
-                <ActivityIndicator size="large" />
-            ) : error ? (
-                <Text style={{ color: "red" }}>{error}</Text>
-            ) : (
-                <View style={{ flex: 1 }}>
-                    <FlatList data={history} keyExtractor={(item) => item.id} renderItem={({item}) => <HistoryCard item={item}/>} showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }} />
-                </View>
-            )}
+            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }}>
+                <BalanceCard />
+                <Text style={{ fontWeight: "800", fontSize: 20, margin: 10 }}>Scan History</Text>
+                
+                {loading ? (
+                    <ActivityIndicator size="large" />
+                ) : error ? (
+                    <Text style={{ color: "red" }}>{error}</Text>
+                ) : (
+                    history.map((item) => <HistoryCard key={item.id} item={item} />)
+                )}
+            </ScrollView>
 
             <BottomNav navigation={navigation} />
         </View>
