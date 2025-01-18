@@ -43,11 +43,12 @@ export default function BottomNav({ navigation }: prop) {
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity>
-                    <View style={{ width: 45, height: 45, alignItems: "center", justifyContent: "center" }}>
-                        <MaterialIcons name="attach-money" size={30} color="black" />
+                <TouchableOpacity onPress={() => navigation.navigate("ProfilePage")}>
+                    <View style={{ backgroundColor: activeButt(["ProfilePage"]) ? "black" : "transparent", width: 45, height: 45, alignItems: "center", justifyContent: "center", borderRadius: 10 }}>
+                        <Ionicons name="person-outline" size={30} color={activeButt(["ProfilePage"]) ? "white" : "black"}/>
                     </View>
                 </TouchableOpacity>
+
             </View>
         </>
     );

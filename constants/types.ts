@@ -6,6 +6,7 @@ export type RootStackParamList = {
     ScanPage: undefined;
     SignIn: undefined;
     SignUp: undefined;
+    ProfilePage: undefined;
 };
 
 export interface WasteCategory {
