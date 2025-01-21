@@ -6,6 +6,8 @@ import { auth } from "../constants/firebaseConfig";
 import { FirebaseError } from 'firebase/app';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, User } from "firebase/auth";
 import { useRouter, useSegments } from "expo-router";
+import SignIn from "@/components/SignIn";
+import SignUp from "@/components/SignUp";
 
 export default function SignPage(){
     const [email, setEmail] = useState('');
@@ -65,23 +67,26 @@ export default function SignPage(){
     }
 
     return (
-        <View style={styles.container}>
-            <KeyboardAvoidingView behavior="padding">
-                <Text>Email</Text>
-                <TextInput style={styles.input} value={email} onChangeText={setEmail} autoCapitalize="none" keyboardType="email-address" />
-                <Text>Password</Text>
-                <TextInput style={styles.input} value={password} onChangeText={setPassword} secureTextEntry />
+        // <SignUp></SignUp>
+        <SignIn></SignIn>
+        
+        // <View style={styles.container}>
+        //     <KeyboardAvoidingView behavior="padding">
+        //         <Text>Email</Text>
+        //         <TextInput style={styles.input} value={email} onChangeText={setEmail} autoCapitalize="none" keyboardType="email-address" />
+        //         <Text>Password</Text>
+        //         <TextInput style={styles.input} value={password} onChangeText={setPassword} secureTextEntry />
 
-                {loading ? (
-                    <ActivityIndicator size={'small'} style={{ margin: 20}}/>
-                ) : (
-                    <>
-                        <Button onPress={signUp} title="Sign Up"/>
-                        <Button onPress={signIn} title="Sign In"/>
-                    </>
-                )}
-            </KeyboardAvoidingView>
-        </View>
+        //         {loading ? (
+        //             <ActivityIndicator size={'small'} style={{ margin: 20}}/>
+        //         ) : (
+        //             <>
+        //                 <Button onPress={signUp} title="Sign Up"/>
+        //                 <Button onPress={signIn} title="Sign In"/>
+        //             </>
+        //         )}
+        //     </KeyboardAvoidingView>
+        // </View>
     )
 }
 
