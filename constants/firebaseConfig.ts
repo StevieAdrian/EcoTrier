@@ -1,6 +1,6 @@
 import { initializeApp, getApp, getApps, FirebaseApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-// import Constants from "expo-constants";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
@@ -21,3 +21,4 @@ if (getApps().length === 0) {
 const auth = getAuth(app);
 
 export { auth };
+export const db = getFirestore(app);

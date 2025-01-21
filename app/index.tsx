@@ -43,7 +43,7 @@ export default function Index() {
               <Stack.Screen name="ScanPage" component={ScanPage} />
             </>
           ) : (
-            <Stack.Screen name="SignPage" component={SignPage} options={{ headerShown: false }} />
+              <Stack.Screen name="SignPage" component={SignPage} options={{ headerShown: false }} />
           )}
         </Stack.Navigator>
     </GestureHandlerRootView>
