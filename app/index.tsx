@@ -8,6 +8,8 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import HomePage from "./home";
 import ScanPage from "./scan";
 import SignPage from "./sign";
+import SignIn from "@/components/SignIn";
+import SignUp from "@/components/SignUp";
 
 const Stack = createNativeStackNavigator();
 
@@ -43,7 +45,11 @@ export default function Index() {
               <Stack.Screen name="ScanPage" component={ScanPage} />
             </>
           ) : (
+            <>
               <Stack.Screen name="SignPage" component={SignPage} options={{ headerShown: false }} />
+              <Stack.Screen name="SignIn" component={SignIn}/>
+              <Stack.Screen name="SignUp" component={SignUp}/>
+            </>
           )}
         </Stack.Navigator>
     </GestureHandlerRootView>

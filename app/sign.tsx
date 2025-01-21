@@ -9,7 +9,7 @@ import { useRouter, useSegments } from "expo-router";
 import SignIn from "@/components/SignIn";
 import SignUp from "@/components/SignUp";
 
-export default function SignPage(){
+export default function SignPage({ navigation }: { navigation: any }){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -68,26 +68,7 @@ export default function SignPage(){
     }
 
     return (
-        // <SignUp></SignUp>
-        <SignIn></SignIn>
-        
-        // <View style={styles.container}>
-        //     <KeyboardAvoidingView behavior="padding">
-        //         <Text>Email</Text>
-        //         <TextInput style={styles.input} value={email} onChangeText={setEmail} autoCapitalize="none" keyboardType="email-address" />
-        //         <Text>Password</Text>
-        //         <TextInput style={styles.input} value={password} onChangeText={setPassword} secureTextEntry />
-
-        //         {loading ? (
-        //             <ActivityIndicator size={'small'} style={{ margin: 20}}/>
-        //         ) : (
-        //             <>
-        //                 <Button onPress={signUp} title="Sign Up"/>
-        //                 <Button onPress={signIn} title="Sign In"/>
-        //             </>
-        //         )}
-        //     </KeyboardAvoidingView>
-        // </View>
+        <SignIn navigation={navigation}></SignIn>
     )
 }
 
