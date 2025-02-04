@@ -1,18 +1,51 @@
-import AppNavigator from "./AppNavigator";
+import { useEffect, useState } from "react";
+import { auth } from "../constants/firebaseConfig";
+import { onAuthStateChanged, User } from "firebase/auth";
+import { ActivityIndicator, View } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import HomePage from "./home";
 import AllCategories from "./categories";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import HomePage from "./home";
+import ScanPage from "./scan";
+import SignPage from "./sign";
 
 const Stack = createNativeStackNavigator();
+
 export default function Index() {
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      console.log("onAuthStateChanged", user);
+      setUser(user);
+      setInitializing(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  if (initializing) {
+    return (
+      <View style={{ alignItems: "center", justifyContent: "center", flex: 1 }}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+
   return (
-    // <HomePage />
-    <GestureHandlerRootView style={{flex: 1}}>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomePage} />
-        <Stack.Screen name="AllCategories" component={AllCategories} />
-      </Stack.Navigator>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+        <Stack.Navigator>
+          {user ? (
+            <>
+              <Stack.Screen name="Home" component={HomePage} />
+              <Stack.Screen name="AllCategories" component={AllCategories} />
+              <Stack.Screen name="ScanPage" component={ScanPage} />
+            </>
+          ) : (
+            <Stack.Screen name="SignPage" component={SignPage} options={{ headerShown: false }} />
+          )}
+        </Stack.Navigator>
     </GestureHandlerRootView>
   );
 }
