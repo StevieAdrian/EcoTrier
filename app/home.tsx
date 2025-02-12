@@ -9,7 +9,6 @@ export default function HomePage() {
     const { takePhoto, image, response, loading, error } = useCamera();
     const [modal, setModal] = useState(false);
 
-
     const handleTakePhoto = async () => {
         await takePhoto();
         setModal(true);
