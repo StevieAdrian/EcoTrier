@@ -4,8 +4,9 @@ import { TouchableOpacity, View, Text } from "react-native";
 import React from "react";
 import useCamera from "@/hooks/useCamera";
 import ResultScreen from "@/components/ResultScreen";
+import WasteCategory from "@/components/WasteCategory";
 
-export default function HomePage() {
+export default function HomePage({ navigation }: { navigation: any }) {
     const { takePhoto, image, response, loading, error } = useCamera();
     const [modal, setModal] = useState(false);
 
@@ -16,6 +17,8 @@ export default function HomePage() {
 
     return (
         <View style={{ flex: 1, backgroundColor: "#D2DBDE", justifyContent: "center", alignItems: "center" }}>  
+            <WasteCategory navigation={navigation} />
+            
             <View style={{ position: "absolute", bottom: 0, flexDirection: "row", justifyContent: "space-between", width: "100%", backgroundColor: "#BCC3C3", alignItems: "center", padding: 15 }}>             
                 <Ionicons name="home" size={30} color="black" />
                 <Ionicons name="person" size={30} color="black" />
