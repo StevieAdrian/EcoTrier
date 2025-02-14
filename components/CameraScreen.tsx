@@ -1,38 +1,58 @@
-import { useState } from 'react';
-import { View, Button, Image, Alert, Text } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
-import useOpenAI from '@/hooks/useOpenAI';
+import { useState } from "react";
+import { View, Button, Image, Alert, Text } from "react-native";
+import * as ImagePicker from "expo-image-picker";
+import handleUpData from "@/hooks/useCloudinary";
+import useOpenAI from "@/hooks/useOpenAI";
 
 export default function CameraScreen() {
-    const [image, setImage] = useState<string | null>(null);
-    const { requestToOpenAI, response, loading, error } = useOpenAI();
+  const [image, setImage] = useState<string | null>(null);
+  const [uploadedUrl, setUploadedUrl] = useState<string | null>(null);
+  const { requestToOpenAI, response, loading, error } = useOpenAI();
 
-    const takePhoto = async () => {
-        const { status } = await ImagePicker.requestCameraPermissionsAsync();
-        if (status !== 'granted') {
-            Alert.alert('Permission Denied', 'You need to enable camera permissions.');
-            return;
-        }
+  const takePhoto = async () => {
+      console.log("Minta izin kamera...");
+      const { status } = await ImagePicker.requestCameraPermissionsAsync();
 
-        const result = await ImagePicker.launchCameraAsync({
-            allowsEditing: true,
-            aspect: [4, 3],
-            quality: 1,
-        });
+      if (status !== "granted") {
+        Alert.alert("Permission Denied", "You need to enable camera permissions.");
+        return;
+    }
 
-        if (!result.canceled) {
-            const photoUri = result.assets[0].uri;
-            setImage(photoUri);
-            requestToOpenAI(photoUri); 
-        }
-    };
+    console.log("Membuka kamera...");
+    const result = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
 
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Button title={loading ? "Processing..." : "Take a Photo"} onPress={takePhoto} disabled={loading} />
-            {image && <Image source={{ uri: image }} style={{ width: 200, height: 200, marginTop: 20 }} />}
-            {response && <Text style={{ marginTop: 10 }}>Result: {response}</Text>}
-            {error && <Text style={{ color: 'red', marginTop: 10 }}>{error}</Text>}
-        </View>
-    );
+    if (!result.canceled) {
+      const fileUri = result.assets[0].uri;
+      console.log("Foto diambil:", fileUri);
+      setImage(fileUri);
+      console.log("Mengupload gambar...");
+      const uploadedImageUrl = await handleUpData(fileUri);
+
+      if (uploadedImageUrl) {
+        setUploadedUrl(uploadedImageUrl);
+        Alert.alert("Upload Success", "Image uploaded successfully!");
+        await requestToOpenAI(uploadedImageUrl);
+      } else {
+        console.log("Upload gagal.");
+      }
+    } else {
+      console.log("Pengambilan foto dibatalkan.");
+    }
+  };
+
+  return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Button title="Take a Photo" onPress={takePhoto} />
+      {image && <Image source={{ uri: image }} style={{ width: 200, height: 200, marginTop: 20 }} />}
+      {uploadedUrl && <Text>Uploaded URL: {uploadedUrl}</Text>}
+      {loading && <Text>Processing Image...</Text>}
+      {response && <Text style={{ color: "white" }}>{response}</Text>}
+      {error && <Text style={{ color: "red" }}>Error: {error}</Text>}
+      {/* <Text style={{ color: "white"}}>tes</Text> */}
+    </View>
+  );
 }

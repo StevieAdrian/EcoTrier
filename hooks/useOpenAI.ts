@@ -10,9 +10,10 @@ const useOpenAI = () => {
     const requestToOpenAI = async (imageUrl: string) => {
         setLoading(true);
         setError(null);
-
+    
         const requestBody = OPENAI_JSON1(imageUrl);
-
+        // console.log("debig1:", JSON.stringify(requestBody, null, 2));
+    
         try {
             const res = await fetch("https://api.openai.com/v1/chat/completions", {
                 method: "POST",
@@ -22,21 +23,28 @@ const useOpenAI = () => {
                 },
                 body: JSON.stringify(requestBody),
             });
-
+    
             const data = await res.json();
-            console.log("Response Data:", data);
-
+            // console.log("debug2:", JSON.stringify(data, null, 2));
+    
             if (res.ok) {
-                setResponse(data.choices?.[0]?.message?.content || "No response!");
+                const content = data.choices?.[0]?.message?.content; 
+                if (content) {
+                    setResponse(content); 
+                    console.log("OpenAI Response:", content);
+                } else {
+                    setError("No valid response from OpenAI.");
+                }
             } else {
                 setError(data.error?.message || "Something went wrong!");
             }
         } catch (err) {
+            console.error("Request Failed:", err);
             setError("Failed to connect to OpenAI");
         } finally {
             setLoading(false);
         }
-    };
+    }
 
     return { requestToOpenAI, response, loading, error };
 };
