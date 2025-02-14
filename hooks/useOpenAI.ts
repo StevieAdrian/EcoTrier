@@ -1,26 +1,25 @@
 import { useState } from "react";
 import { OPENAI_JSON1 } from "../constants/apiConfig"; 
-import { OPENAI_API_KEY } from "@env"; 
 
 const useOpenAI = () => {
     const [loading, setLoading] = useState(false);
     const [response, setResponse] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
-
+    const key = process.env.EXPO_PUBLIC_OPENAI_API_KEY;
+    
     const requestToOpenAI = async (imageUrl: string) => {
         setLoading(true);
         setError(null);
     
         const requestBody = OPENAI_JSON1(imageUrl);
         // console.log("debig1:", JSON.stringify(requestBody, null, 2));
-        console.log(OPENAI_API_KEY);
         
         try {
             const res = await fetch("https://api.openai.com/v1/chat/completions", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${OPENAI_API_KEY}`,
+                    Authorization: `Bearer ${key}`,
                 },
                 body: JSON.stringify(requestBody),
             });

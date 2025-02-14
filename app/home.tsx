@@ -3,7 +3,7 @@ import { useState } from "react";
 import { TouchableOpacity, View, Text } from "react-native";
 import React from "react";
 import useCamera from "@/hooks/useCamera";
-import CameraScreen from "@/components/CameraScreen";
+import ResultScreen from "@/components/ResultScreen";
 
 export default function HomePage() {
     const { takePhoto, image, response, loading, error } = useCamera();
@@ -21,15 +21,14 @@ export default function HomePage() {
                 <Ionicons name="person" size={30} color="black" />
             </View>
 
-            <TouchableOpacity 
-            onPress={handleTakePhoto}
-            style={{ position: "absolute", bottom: 25, left: "50%", transform: [{ translateX: -30 }], backgroundColor: "white", padding: 15, borderRadius: 50, elevation: 5 }} >
+            <TouchableOpacity onPress={handleTakePhoto} style={{ position: "absolute", bottom: 25, left: "50%", transform: [{ translateX: -30 }], backgroundColor: "white", padding: 15, borderRadius: 50, elevation: 5 }} >
                 <Ionicons name="scan" size={30} color="black" />
             </TouchableOpacity>
             
             {image && (
-                <CameraScreen visible={modal} onClose={() => setModal(false)} image={image} loading={loading} response={response} error={error} />
+                <ResultScreen visible={modal} onClose={() => setModal(false)} image={image} loading={loading} response={response} error={error} />
             )}
+            
         </View>
     );
 }
