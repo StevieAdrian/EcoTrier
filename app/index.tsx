@@ -1,15 +1,15 @@
-import { Text, View } from "react-native";
+import AppNavigator from "./AppNavigator";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
+import HomePage from "./home";
 
+const Stack = createNativeStackNavigator();
 export default function Index() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-    </View>
+    <HomePage />
+    // <Stack.Navigator>
+    //   <Stack.Screen name="Home" component={HomePage} />
+    //   <Stack.Screen name="CameraScreen" component={TesCamera} />
+    // </Stack.Navigator>
   );
 }
