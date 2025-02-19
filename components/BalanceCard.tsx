@@ -22,5 +22,6 @@ export default function BalanceCard() {
                 <Text style={{ color: "white", marginLeft: 5 }}>Withdraw</Text>
             </View>
         </View>
+        
     );
 }
