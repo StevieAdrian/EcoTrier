@@ -40,7 +40,7 @@ export default function AllCategories({ navigation }: prop) {
                 />
             </View>
 
-            <BottomNav />
+            <BottomNav navigation={navigation} />
             <CategoryModal visible={modal} category={selectedCategory} onClose={closeModal} />
         </View>
     );

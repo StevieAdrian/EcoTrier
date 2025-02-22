@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "592845715812",
+    "project_id": "ecotrier-fe32c",
+    "storage_bucket": "ecotrier-fe32c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:592845715812:android:73ac467f5c937137302271",
+        "android_client_info": {
+          "package_name": "com.steviea.EcoTrier"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "592845715812-41s2nhs3cldfahbq7af3lnp71437v0hk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByu3PgvgeQtPT_aICOzzpzAzQU7xu0pPo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "592845715812-41s2nhs3cldfahbq7af3lnp71437v0hk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
