@@ -17,6 +17,7 @@ export default function SignPage(){
     const [initializing, setInitializing] = useState(true);
     const router = useRouter();
     const segments = useSegments();
+    const [isSignUp, setIsSignUp] = useState(false);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
