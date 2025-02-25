@@ -5,8 +5,13 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { FirebaseError } from "firebase/app";
 import { auth } from "../constants/firebaseConfig";
 import { router } from "expo-router";
+import { NavigationProp } from "@/constants/types";
 
-export default function SignIn() {
+type prop = {
+    navigation: NavigationProp;
+}
+
+export default function SignIn({ navigation }: prop) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(false);
@@ -39,11 +44,8 @@ export default function SignIn() {
                 </TouchableOpacity>
             </View>
 
-            <Text style={{ textAlign: "center", marginTop: 2, marginBottom: 15, fontWeight: 600 }}> Forgot Password?{" "} </Text>
+            <Text style={{ textAlign: "center", marginTop: 2, marginBottom: 15, fontWeight: 600 }}> Forgot Password? {""} </Text>
 
-            {/* <TouchableOpacity style={{ backgroundColor: "black", height: 50, justifyContent: "center", alignItems: "center" as const, borderRadius: 8, marginBottom: 6 }}>
-                <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>Login</Text>
-            </TouchableOpacity> */}
             <TouchableOpacity 
                 style={{ backgroundColor: "black", height: 50, justifyContent: "center", alignItems: "center", borderRadius: 8, marginBottom: 6 }} 
                 onPress={signIn} 
@@ -53,7 +55,7 @@ export default function SignIn() {
             </TouchableOpacity>
 
             <Text style={{ textAlign: "center", marginTop: 15 }}> Don't have an account?{" "}
-                <Text style={{ fontWeight: "bold" }}>Signup</Text>
+                <Text style={{ fontWeight: "bold", color: "blue" }} onPress={() => navigation.navigate("SignUp")}>Signup</Text>
             </Text>
 
             <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", marginTop: 20}}>

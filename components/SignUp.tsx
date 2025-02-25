@@ -6,8 +6,13 @@ import { auth, db } from "../constants/firebaseConfig";
 import { FirebaseError } from "firebase/app";
 import { doc, setDoc } from "firebase/firestore";
 import { router } from "expo-router";
+import { NavigationProp } from "@/constants/types";
 
-export default function SignUp() {
+type prop = {
+    navigation: NavigationProp;
+}
+
+export default function SignUp({ navigation }: prop) {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -59,7 +64,7 @@ export default function SignUp() {
 
             <Text style={{ textAlign: "center", marginTop: 15 }}>
                 Already have an account?{" "}
-                <Text style={{ fontWeight: "bold" }}>Login</Text>
+                <Text style={{ fontWeight: "bold", color: "blue" }} onPress={() => navigation.navigate("SignIn")}>Login</Text>
             </Text>
 
             <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", marginTop: 20}}>

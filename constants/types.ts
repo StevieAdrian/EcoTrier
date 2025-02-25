@@ -4,6 +4,8 @@ export type RootStackParamList = {
     Home: undefined;
     AllCategories: undefined;
     ScanPage: undefined;
+    SignIn: undefined;
+    SignUp: undefined;
 };
 
 export interface WasteCategory {
