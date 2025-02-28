@@ -54,10 +54,10 @@ export default function ActionProfile() {
                         <View style={{backgroundColor: "white", padding: 20, borderRadius: 12, width: "80%", alignItems: "center" }}>
                             <Text style={{ fontSize: 16, fontWeight: "bold", marginBottom: 15 }}>Are you sure want to log out?</Text>
                             <TouchableOpacity style={{ backgroundColor: "black", paddingVertical: 10, width: "100%", alignItems: "center", borderRadius: 8, marginBottom: 10 }} onPress={handleLogout}>
-                                <Text style={{ color: "white", fontWeight: "bold" }}>Yes</Text>
+                                <Text style={{ color: "white", fontWeight: "700" }}>Yes</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={{ backgroundColor: "#D2D2D2", paddingVertical: 10, width: "100%", alignItems: "center", borderRadius: 8 }} onPress={() => signOut(auth)}>
-                                <Text style={{ color: "white", fontWeight: "bold" }}>Back</Text>
+                            <TouchableOpacity style={{ backgroundColor: "#D1D1D6", paddingVertical: 10, width: "100%", alignItems: "center", borderRadius: 8 }} onPress={() => closeModal()}>
+                                <Text style={{ color: "black", fontWeight: "700" }}>Back</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
