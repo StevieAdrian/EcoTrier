@@ -7,6 +7,7 @@ export type RootStackParamList = {
     SignIn: undefined;
     SignUp: undefined;
     ProfilePage: undefined;
+    ScanHistory: undefined;
 };
 
 export interface WasteCategory {
@@ -14,6 +15,21 @@ export interface WasteCategory {
     name: string;
     icon: any;
     description: string;
+}
+
+export interface ScanHistoryProp {
+    id: string;
+    createdAt: Date;
+    imageUrl: string;
+    kategoriSampah: string;
+    sumberSampah: string;
+    berbahaya: string;
+    waktuTerurai: string;
+    jenisBahan: string;
+    dampakLingkungan: string;
+    daurUlang: string;
+    solusiPengelolaan: string;
+    uid: string;
 }
 
 export type NavigationProp = StackNavigationProp<RootStackParamList>;

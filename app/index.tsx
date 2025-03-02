@@ -11,6 +11,7 @@ import SignPage from "./sign";
 import SignIn from "@/components/SignIn";
 import SignUp from "@/components/SignUp";
 import ProfilePage from "./profile";
+import ScanHistory from "./scanHistory";
 
 const Stack = createNativeStackNavigator();
 
@@ -45,6 +46,7 @@ export default function Index() {
               <Stack.Screen name="AllCategories" component={AllCategories} />
               <Stack.Screen name="ScanPage" component={ScanPage} />
               <Stack.Screen name="ProfilePage" component={ProfilePage}/>
+              <Stack.Screen name="ScanHistory" component={ScanHistory} />
             </>
           ) : (
             <>

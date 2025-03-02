@@ -25,9 +25,9 @@ export default function BottomNav({ navigation }: prop) {
                     </View>
                 </TouchableOpacity>
                 
-                <TouchableOpacity>
-                    <View style={{ backgroundColor: activeButt(["Notifications"]) ? "black" : "transparent",  width: 45, height: 45, alignItems: "center", justifyContent: "center" }} >
-                        <Ionicons name="notifications-outline" size={30} color={activeButt(["Notifications"]) ? "white" : "black"} />
+                <TouchableOpacity onPress={() => navigation.navigate("ScanHistory")}>
+                    <View style={{ backgroundColor: activeButt(["ScanHistory"]) ? "black" : "transparent",  width: 45, height: 45, alignItems: "center", justifyContent: "center", borderRadius: 10  }} >
+                        <Ionicons name="notifications-outline" size={30} color={activeButt(["ScanHistory"]) ? "white" : "black"} />
                     </View>
                 </TouchableOpacity>
 
