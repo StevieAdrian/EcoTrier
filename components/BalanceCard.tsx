@@ -3,7 +3,8 @@ import { Ionicons } from "@expo/vector-icons";
 import useUserData from "@/hooks/useUserData";
 
 export default function BalanceCard() {
-    const { name, loading } = useUserData();
+    const { userData, loading } = useUserData();
+    const name = userData?.name || "Gk ada";
     
     return (
         <View style={{ backgroundColor: "black", borderRadius: 12, padding: 20, width: "90%", alignSelf: "center", marginTop: 20 }}>
