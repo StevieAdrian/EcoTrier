@@ -86,5 +86,31 @@ export default function useCamera(navigation: NavigationProp) {
         navigation.navigate("CameraScreen", { onPhotoTaken: handlePhotoTaken });
     };
 
-    return { image, response, loading, error, openCameraScreen };
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+    
+        if (!result.canceled) {
+            const selectedImageUri = result.assets[0].uri;
+            console.log("gallery image uri : ", selectedImageUri);
+            setImage(selectedImageUri);
+    
+            console.log("Mengupload gambar...");
+            const uploadedImageUrl = await handleUpData(selectedImageUri);
+    
+            if (uploadedImageUrl) {
+                setUploadedUrl(uploadedImageUrl);
+                Alert.alert("Upload Success", "Image uploaded successfully!");
+                await requestToOpenAI(uploadedImageUrl);
+            } else {
+                console.log("Upload gagal.");
+            }
+        }
+    };
+
+    return { image, response, loading, error, openCameraScreen, pickImage };
 }

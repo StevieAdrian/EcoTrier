@@ -49,7 +49,7 @@ export default function CameraScreen({ navigation }: prop) {
         {photoUri ? (
             <Image source={{ uri: photoUri }} style={styles.camera} />
         ) : (
-            <CameraView ref={cameraRef} style={styles.camera} type={facing}>  
+            <CameraView ref={cameraRef} style={styles.camera} facing={facing}>  
             <View style={styles.scannerFrameContainer}>
                 <View style={styles.scannerFrame}>
                 <View style={styles.cornerTopLeft} />

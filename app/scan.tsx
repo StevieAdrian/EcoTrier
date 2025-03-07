@@ -13,7 +13,7 @@ type prop = {
 }
 
 export default function ScanPage({ navigation }: prop) {
-    const { image, response, loading, error, openCameraScreen } = useCamera(navigation);
+    const { image, response, loading, error, openCameraScreen, pickImage } = useCamera(navigation);
     const [modal, setModal] = useState(false);
 
     useEffect(() => {
@@ -36,7 +36,9 @@ export default function ScanPage({ navigation }: prop) {
                     <Text style={{ marginHorizontal: 10, fontSize: 18 }}>Or</Text>
                     <View style={{ flex: 0.4, height: 1, backgroundColor: "black" }} />
                 </View>
-                <ActionButton>Choose From Gallery</ActionButton>
+                <TouchableOpacity onPress={pickImage}>
+                    <ActionButton>Choose From Gallery</ActionButton>
+                </TouchableOpacity>
             </ScrollView>
 
             {image && (
