@@ -1,8 +1,9 @@
 import AvatarPicker from "@/components/AvatarPicker";
 import BottomNav from "@/components/BottomNav";
+import ProfileForm from "@/components/ProfileForm";
 import { NavigationProp } from "@/constants/types";
 import { Ionicons } from "@expo/vector-icons";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, TextInput, ScrollView } from "react-native";
 
 type prop = {
     navigation: NavigationProp;
@@ -10,16 +11,18 @@ type prop = {
 
 export default function EditProfile({ navigation }: prop) {
     return (
-        <View style={{ flex: 1 }}>
-            <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", marginBottom: 20, marginTop: 15 }}>
-                <TouchableOpacity onPress={() => navigation.goBack()} style={{ position: "absolute", left: 0 }}>
-                    <Ionicons name="arrow-back" size={30} color="black" style={{ marginLeft: 15 }} />
+        <View style={{ flex: 1, alignItems: "center" }}>
+            <View style={{ flexDirection: "row", alignItems: "center", width: "100%", paddingTop: 25 }}>
+                <TouchableOpacity onPress={() => navigation.goBack()} style={{ position: "absolute", left: 15 }}>
+                    <Ionicons name="arrow-back" size={30} color="black" />
                 </TouchableOpacity>
-                <Text style={{ fontSize: 18, fontWeight: "bold", textAlign: "center" }}>Edit Profile</Text>
-            
-                <AvatarPicker />
-            
+                <Text style={{ fontSize: 18, fontWeight: "bold", textAlign: "center", flex: 1 }}>Edit Profile</Text>
             </View>
+
+            <AvatarPicker />
+            <ScrollView style={{ width: "100%" }}>
+                <ProfileForm />
+            </ScrollView>
 
             <BottomNav navigation={navigation}/>
         </View>
