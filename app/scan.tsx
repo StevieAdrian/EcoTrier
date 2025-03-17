@@ -40,7 +40,7 @@ export default function ScanPage({ navigation }: prop) {
             </ScrollView>
 
             {image && (
-                <ResultScreen visible={modal} onClose={() => setModal(false)} image={image} loading={loading} response={response} error={error} />
+                <ResultScreen visible={modal} onClose={() => { navigation.goBack(); setModal(false) }} image={image} loading={loading} response={response} error={error} />
             )} 
             
             <BottomNav navigation={navigation} />
