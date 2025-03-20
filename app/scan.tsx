@@ -4,7 +4,7 @@ import Cards from "@/components/Cards";
 import ResultScreen from "@/components/ResultScreen";
 import { NavigationProp } from "@/constants/types";
 import useCamera from "@/hooks/useCamera";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -13,20 +13,21 @@ type prop = {
 }
 
 export default function ScanPage({ navigation }: prop) {
-    const { takePhoto, image, response, loading, error } = useCamera();
+    const { image, response, loading, error, openCameraScreen } = useCamera(navigation);
     const [modal, setModal] = useState(false);
-    
-    const handleTakePhoto = async () => {
-        await takePhoto();
-        setModal(true);
-    }
+
+    useEffect(() => {
+        if (response) {
+            setModal(true);
+        }
+    }, [response]);
 
     return (
         <>
             <ScrollView contentContainerStyle={{ flexGrow: 1, alignItems: "center", paddingBottom: 100 }} showsVerticalScrollIndicator={false}>             
                 <Cards />
                 
-                <TouchableOpacity onPress={handleTakePhoto} style={{ width: "100%", marginTop: 15 }}>
+                <TouchableOpacity onPress={openCameraScreen} style={{ width: "100%", marginTop: 15 }}>
                     <ActionButton>Scan Now</ActionButton>
                 </TouchableOpacity>
 

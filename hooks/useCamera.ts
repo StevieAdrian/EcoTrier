@@ -5,12 +5,15 @@ import { useEffect, useState } from "react";
 import useOpenAI from "./useOpenAI";
 import { auth, firestore } from "@/constants/firebaseConfig";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { useNavigation } from "expo-router";
+import { NavigationProp, RootStackParamList } from "@/constants/types";
 
-export default function useCamera() {
+
+export default function useCamera(navigation: NavigationProp) {
     const [image, setImage] = useState<string | null>(null);
     const [uploadedUrl, setUploadedUrl] = useState<string | null>(null);
     const { requestToOpenAI, response, loading, error } = useOpenAI();
-    
+
     const parseResult = (response: string) => {
         const result: Record<string, string> = {};
         const lines = response.split("\n").map(line => line.trim()).filter(line => line.length > 0);
@@ -63,40 +66,25 @@ export default function useCamera() {
         }
     }, [response, uploadedUrl]);
 
-    const takePhoto = async () => {
-        console.log("Minta izin kamera...");
-        const { status } = await ImagePicker.requestCameraPermissionsAsync();
-
-        if (status !== "granted") {
-            Alert.alert("Permission Denied", "You need to enable camera permissions.");
-            return;
-        }
-
-        console.log("Membuka kamera...");
-        const result = await ImagePicker.launchCameraAsync({
-            allowsEditing: true,
-            aspect: [4, 3],
-            quality: 1,
-        });
-
-        if (!result.canceled) {
-            const fileUri = result.assets[0].uri;
-            console.log("Foto diambil:", fileUri);
-            setImage(fileUri);
-            console.log("Mengupload gambar...");
-            const uploadedImageUrl = await handleUpData(fileUri);
-
-            if (uploadedImageUrl) {
-                setUploadedUrl(uploadedImageUrl);
-                Alert.alert("Upload Success", "Image uploaded successfully!");
-                await requestToOpenAI(uploadedImageUrl);
-            } else {
-                console.log("Upload gagal.");
-            }
+    const handlePhotoTaken = async (photoUri: string) => {
+        console.log("camera screen uri : ", photoUri);
+        setImage(photoUri);
+    
+        console.log("Mengupload gambar...");
+        const uploadedImageUrl = await handleUpData(photoUri);
+    
+        if (uploadedImageUrl) {
+            setUploadedUrl(uploadedImageUrl);
+            Alert.alert("Upload Success", "Image uploaded successfully!");
+            await requestToOpenAI(uploadedImageUrl);
         } else {
-            console.log("Pengambilan foto dibatalkan.");
+            console.log("Upload gagal.");
         }
+    };    
+
+    const openCameraScreen = async () => {
+        navigation.navigate("CameraScreen", { onPhotoTaken: handlePhotoTaken });
     };
 
-    return { takePhoto, image, response, loading, error };
+    return { image, response, loading, error, openCameraScreen };
 }

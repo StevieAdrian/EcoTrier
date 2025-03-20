@@ -1,12 +1,17 @@
+import { NavigationProp } from "@/constants/types";
 import { Ionicons } from "@expo/vector-icons";
 import { View, Text, TouchableOpacity } from "react-native";
 
-export default function AccountProfile(){
+type prop = {
+    navigation: NavigationProp;
+}
+
+export default function AccountProfile({ navigation }: prop){
     return (
         <View style={{ marginTop: 28 }}>
             <Text style={{ fontSize: 18, fontWeight: 500}}>Account</Text>
             <View style={{ backgroundColor: "#F7F7F8", borderRadius: 10, paddingVertical: 10, marginTop: 10 }}>
-                <TouchableOpacity style={styles.container}>
+                <TouchableOpacity style={styles.container} onPress={() => navigation.navigate("EditProfile")} >
                     <Ionicons name="person-outline" size={24} color="black" />
                     <Text style={styles.text}>Edit profile</Text>
                 </TouchableOpacity>

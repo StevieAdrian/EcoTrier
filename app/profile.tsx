@@ -4,6 +4,7 @@ import { NavigationProp } from "../constants/types";
 import BottomNav from "@/components/BottomNav";
 import AccountProfile from "@/components/AccountProfile";
 import ActionProfile from "@/components/ActionProfile";
+
 type prop = {
     navigation: NavigationProp;
 };
@@ -25,7 +26,7 @@ export default function ProfilePage({ navigation }: prop) {
                         <Image source={require("@/assets/images/ads.png")} style={{ width: "100%", height: "100%" }} resizeMode="cover" />
                     </View>
 
-                    <AccountProfile />
+                    <AccountProfile navigation={navigation}/>
                     <ActionProfile />
                 </View>
             </ ScrollView>

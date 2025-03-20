@@ -8,6 +8,9 @@ export type RootStackParamList = {
     SignUp: undefined;
     ProfilePage: undefined;
     ScanHistory: undefined;
+    AccountProfile: undefined;
+    EditProfile: undefined;
+    CameraScreen: { onPhotoTaken: (photoUri: string) => void };
 };
 
 export interface WasteCategory {
