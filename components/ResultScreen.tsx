@@ -40,33 +40,38 @@ export default function ResultScreen({ visible, onClose, image, loading, respons
 
     return (
         <Modal visible={visible} animationType="fade" transparent={true}>
-            <View style={{ flex: 1, backgroundColor: "rgba(0, 0, 0, 0.6)", justifyContent: "flex-end" }}>
-                <Animated.View style={{ transform: [{ translateY: slideAnim }], opacity: fadeAnim, backgroundColor: "#E2EEF1", padding: 20, borderTopLeftRadius: 25, borderTopRightRadius: 25, elevation: 8, width: "100%", shadowColor: "#000", shadowOffset: { width: 0, height: 5 }, shadowOpacity: 0.3, shadowRadius: 8, }}>
-                    <TouchableOpacity onPress={onClose} style={{ position: "absolute", top: 15, right: 20 }}>
-                        <Ionicons name="close" size={30} color="black" />
+            <View style={{ flex: 1, backgroundColor: "", justifyContent: "flex-end", alignItems: "center" }}>
+                <Animated.View style={{ transform: [{ translateY: slideAnim }], opacity: fadeAnim, backgroundColor: "black", padding: 20, borderRadius: 15, elevation: 8, width: "90%" }}>
+                    <Text style={{ fontSize: 18, fontWeight: "bold", color: "white", textAlign: "center", marginBottom: 10 }}>
+                        Information of the item
+                    </Text>
+
+                    <TouchableOpacity onPress={onClose} style={{ position: "absolute", top: 15, right: 15 }}>
+                        <Ionicons name="close" size={24} color="white" />
                     </TouchableOpacity>
 
-                    {image && (
-                        <View style={{ alignItems: "center", marginTop: 10 }}>
-                            <Image source={{ uri: image }} style={{ width: 250, height: 300, borderRadius: 15, shadowColor: "#000", shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.3, shadowRadius: 6 }} />
-                        </View>
-                    )}
-
-                    <View style={{ marginTop: 20, padding: 15, borderRadius: 15, backgroundColor: "white", shadowColor: "#000", shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.1, shadowRadius: 5, elevation: 5, }}>
-                        {loading && <Text style={{ fontSize: 18, fontWeight: "bold", color: "#555" }}>Processing Image...</Text>}
-
-                        {response && (
-                            <View style={{ padding: 15, borderRadius: 10, backgroundColor: "#FFFFFF", borderLeftWidth: 5, borderLeftColor: "#4CAF50", shadowColor: "#000", shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.1, shadowRadius: 4, elevation: 3, }} >
-                                {response.split("\n").map((line: string, index: number) => (
-                                    <Text key={index} style={{ fontSize: 16, fontWeight: "600", color: "#333", marginBottom: 3, }} >
-                                        {line}
-                                    </Text>
-                                ))}
-                            </View>
-                        )}
+                    <View style={{ marginVertical: 10 }}>
+                        {response && response.split("\n").map((line: string, index: number) => {
+                            const [key, value] = line.split(":");
+                            return (
+                                <View key={index} style={{ flexDirection: "row", marginBottom: 4 }}>
+                                    <Text style={{ fontSize: 16, fontWeight: "700", color: "white", flex: 1 }}>{key?.trim()} :</Text>
+                                    <Text style={{ fontSize: 16, fontWeight: "400", color: "white", flex: 1 }}>{value?.trim()}</Text>
+                                </View>
+                            );
+                        })}
                     </View>
 
-                    {error && <Text style={{ color: "red", marginTop: 15, textAlign: "center", fontWeight: "bold" }}>{error}</Text>}
+                    <View style={{ flexDirection: "row", justifyContent: "center", gap: 20, marginBottom: 15 }}>
+                        <View style={{ width: 80, height: 80, backgroundColor: "white", borderRadius: 10, opacity: 0.5 }} />
+                        <View style={{ width: 80, height: 80, backgroundColor: "white", borderRadius: 10, opacity: 0.5 }} />
+                    </View>
+
+                    <Text style={{ textAlign: "center", color: "white", marginBottom: 10, fontWeight: "700" }}>Want to know more about plastic waste?</Text>
+
+                    <TouchableOpacity style={{ backgroundColor: "white", padding: 10, borderRadius: 16, alignItems: "center" }}>
+                        <Text style={{ fontSize: 16, fontWeight: "800", color: "black" }}>Click Here</Text>
+                    </TouchableOpacity>
                 </Animated.View>
             </View>
         </Modal>
