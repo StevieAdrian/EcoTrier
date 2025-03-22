@@ -12,6 +12,9 @@ import SignIn from "@/components/SignIn";
 import SignUp from "@/components/SignUp";
 import ProfilePage from "./profile";
 import ScanHistory from "./scanHistory";
+import EditProfile from "./editProfile";
+import AccountProfile from "@/components/AccountProfile";
+import CameraScreen from "@/components/CameraScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -45,8 +48,11 @@ export default function Index() {
               <Stack.Screen name="Home" component={HomePage} />
               <Stack.Screen name="AllCategories" component={AllCategories} />
               <Stack.Screen name="ScanPage" component={ScanPage} />
+              <Stack.Screen name="CameraScreen" component={CameraScreen} />
               <Stack.Screen name="ProfilePage" component={ProfilePage}/>
               <Stack.Screen name="ScanHistory" component={ScanHistory} />
+              <Stack.Screen name="AccountProfile" component={AccountProfile}/>
+              <Stack.Screen name="EditProfile" component={EditProfile} />
             </>
           ) : (
             <>
