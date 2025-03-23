@@ -15,48 +15,37 @@ export default function AvatarPicker() {
                 allowsEditing: true,
                 aspect: [1,1],
                 quality: 1,
-            })
+            });
         } else {
             result = await ImagePicker.launchImageLibraryAsync({
                 mediaTypes: ImagePicker.MediaTypeOptions.Images,
                 allowsEditing: true,
                 aspect: [1,1],
                 quality: 1,
-            })
+            });
         }
 
-        if (!result.canceled){
-            setImage(result.assets[0].uri)
+        if (!result.canceled) {
+            setImage(result.assets[0].uri);
         }
-    }
-    const choosePhoto = async () => {
-        const options = ["Take a photo", "Choose from gallery", "Back"];
-        const cancelButton = 2;
+    };
 
+    const choosePhoto = () => {
         Alert.alert("Change Profile Picture", "Choose Photo", [
-            {
-                text: "Take a photo",
-                onPress: () => pickPhoto("camera"),
-            },
-            {
-                text: "Choose from gallery",
-                onPress: () => pickPhoto("gallery"),
-            },
-            {
-                text: "Back",
-                style: "cancel",
-            }
-        ])
-    }
+            { text: "Take a photo", onPress: () => pickPhoto("camera") },
+            { text: "Choose from gallery", onPress: () => pickPhoto("gallery") },
+            { text: "Cancel", style: "cancel" }
+        ]);
+    };
 
     return (
         <View style={styles.container}>
-            {/* <Image
-                source={image ? { uri: image } : require('@/assets/default-avatar.png')}
+            <Image
+                source={image ? { uri: image } : require('@/assets/images/organic.png')}
                 style={styles.avatar}
-            /> */}
+            />
             <TouchableOpacity style={styles.cameraButton} onPress={choosePhoto}>
-                <Ionicons name="camera" size={20} color="white" />
+                <Ionicons name="camera" size={18} color="white" />
             </TouchableOpacity>
         </View>
     );
@@ -78,8 +67,8 @@ const styles = StyleSheet.create({
     },
     cameraButton: {
         position: 'absolute',
-        bottom: 0,
-        right: 0,
+        bottom: 5,
+        right: 5,
         backgroundColor: '#4F46E5',
         width: 32,
         height: 32,
