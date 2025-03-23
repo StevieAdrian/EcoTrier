@@ -42,7 +42,7 @@ export default function Index() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
           {user ? (
             <>
               <Stack.Screen name="Home" component={HomePage} />
