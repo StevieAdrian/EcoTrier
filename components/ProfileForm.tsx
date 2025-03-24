@@ -1,22 +1,25 @@
-import { useState } from "react";
-import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { View, TouchableOpacity, Text, StyleSheet, ActivityIndicator } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import TextInputField from "@/components/TextInputField"; 
+import TextInputField from "@/components/TextInputField";
+import useUserData from "@/hooks/useUserData";
 
 export default function ProfileForm() {
-    const [name, setName] = useState("Stevie");
-    const [email, setEmail] = useState("Stevie@gmail.com");
-    const [password, setPassword] = useState("**********");
-    const [dob, setDob] = useState("05/09/2007");
-    const [country, setCountry] = useState("Palembang");
+    const { userData, loading } = useUserData();
+
+    if (loading) {
+        return (
+            <View style={styles.loadingContainer}>
+                <ActivityIndicator size="large" color="black" />
+            </View>
+        );
+    }
 
     return (
         <View style={styles.container}>
-            <TextInputField label="Name" value={name} onChangeText={setName} />
-            <TextInputField label="Email" value={email} onChangeText={setEmail} keyboardType="email-address" />
-            <TextInputField label="Password" value={password} onChangeText={setPassword} secureTextEntry />
-            <DropdownField label="Date of Birth" value={dob} />
-            <DropdownField label="Country/Region" value={country} />
+            <TextInputField label="Name" value={userData?.name || ""} />
+            <TextInputField label="Email" value={userData?.email || ""} keyboardType="email-address" />
+            <DropdownField label="Date of Birth" value={userData?.dob || ""} />
+            <DropdownField label="Country/Region" value={userData?.country || ""} />
 
             <TouchableOpacity style={styles.button}>
                 <Text style={styles.buttonText}>Save changes</Text>
@@ -42,7 +45,7 @@ const styles = StyleSheet.create({
         width: "90%",
         alignSelf: "center",
         marginTop: 20,
-        marginBottom: 100
+        marginBottom: 100,
     },
     inputContainer: {
         marginBottom: 15,
@@ -73,5 +76,10 @@ const styles = StyleSheet.create({
     buttonText: {
         color: "white",
         fontWeight: "bold",
+    },
+    loadingContainer: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
     },
 });

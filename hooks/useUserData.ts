@@ -3,7 +3,7 @@ import { auth, db } from "@/constants/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 
 export default function useUserData() {
-    const [name, setName] = useState<string | null>(null);
+    const [userData, setUserData] = useState<{ name: string; email: string; dob: string; country: string } | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -13,7 +13,18 @@ export default function useUserData() {
                 const userDocRef = doc(db, "users", user.uid);
                 const userDoc = await getDoc(userDocRef);
                 if (userDoc.exists()) {
-                    setName(userDoc.data().username || "Unknown");
+                    const data = userDoc.data();
+
+                    const dob = data.dob?.seconds
+                    ? new Date(data.dob.seconds * 1000).toISOString().split("T")[0] 
+                    : "";
+
+                    setUserData({
+                        name: data.username || "Unknown",
+                        email: data.email || "",
+                        dob,
+                        country: data.country || "",
+                    });
                 }
             }
             setLoading(false);
@@ -22,5 +33,5 @@ export default function useUserData() {
         fetchUserData();
     }, []);
 
-    return { name, loading };
+    return { userData, loading };
 }
