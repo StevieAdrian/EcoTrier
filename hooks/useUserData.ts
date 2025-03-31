@@ -20,7 +20,7 @@ export default function useUserData() {
                     : "";
 
                     setUserData({
-                        name: data.username || "Unknown",
+                        name: data.name || "Unknown",
                         email: data.email || "",
                         dob,
                         country: data.country || "",

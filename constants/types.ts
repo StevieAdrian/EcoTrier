@@ -11,6 +11,7 @@ export type RootStackParamList = {
     AccountProfile: undefined;
     EditProfile: undefined;
     CameraScreen: { onPhotoTaken: (photoUri: string) => void };
+    ProfileForm: undefined;
 };
 
 export interface WasteCategory {

@@ -15,6 +15,7 @@ import ScanHistory from "./scanHistory";
 import EditProfile from "./editProfile";
 import AccountProfile from "@/components/AccountProfile";
 import CameraScreen from "@/components/CameraScreen";
+import ProfileForm from "@/components/ProfileForm";
 
 const Stack = createNativeStackNavigator();
 
@@ -53,6 +54,7 @@ export default function Index() {
               <Stack.Screen name="ScanHistory" component={ScanHistory} />
               <Stack.Screen name="AccountProfile" component={AccountProfile}/>
               <Stack.Screen name="EditProfile" component={EditProfile} />
+              <Stack.Screen name="ProfileForm" component={ProfileForm} />
             </>
           ) : (
             <>
