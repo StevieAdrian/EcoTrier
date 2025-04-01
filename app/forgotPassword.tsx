@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { NavigationProp } from "@/constants/types";
+import useForgotPassword from "@/hooks/useForgotPassword";
 
 type Prop = {
     navigation: NavigationProp;
@@ -8,6 +9,7 @@ type Prop = {
 
 export default function ForgotPassword({ navigation }: Prop) {
     const [email, setEmail] = useState("");
+    const { handleForgotPassword, loading } = useForgotPassword();
 
     return (
         <View style={styles.container}>
@@ -23,8 +25,8 @@ export default function ForgotPassword({ navigation }: Prop) {
                 autoCapitalize="none"
             />
 
-            <TouchableOpacity style={styles.button}>
-                <Text style={styles.buttonText}>Send Reset Link</Text>
+            <TouchableOpacity style={styles.button} onPress={() => handleForgotPassword(email)} disabled={loading}>
+                <Text style={styles.buttonText}>{loading ? "Sending..." : "Send Reset Link"}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => navigation.goBack()}>
