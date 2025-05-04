@@ -44,7 +44,7 @@ export default function SignIn({ navigation }: prop) {
                 </TouchableOpacity>
             </View>
 
-            <Text style={{ textAlign: "center", marginTop: 2, marginBottom: 15, fontWeight: 600 }}> Forgot Password? {""} </Text>
+            <Text style={{ textAlign: "center", marginTop: 2, marginBottom: 15, fontWeight: 600 }} onPress={() => navigation.navigate("ForgotPassword")}> Forgot Password? {""} </Text>
 
             <TouchableOpacity 
                 style={{ backgroundColor: "black", height: 50, justifyContent: "center", alignItems: "center", borderRadius: 8, marginBottom: 6 }} 
