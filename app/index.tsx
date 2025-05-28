@@ -16,6 +16,7 @@ import EditProfile from "./editProfile";
 import AccountProfile from "@/components/AccountProfile";
 import CameraScreen from "@/components/CameraScreen";
 import ProfileForm from "@/components/ProfileForm";
+import MapViewScreen from "./mapView";
 
 const Stack = createNativeStackNavigator();
 
@@ -55,6 +56,7 @@ export default function Index() {
               <Stack.Screen name="AccountProfile" component={AccountProfile}/>
               <Stack.Screen name="EditProfile" component={EditProfile} />
               <Stack.Screen name="ProfileForm" component={ProfileForm} />
+              <Stack.Screen name="NearbyStationMap" component={MapViewScreen} />
             </>
           ) : (
             <>
