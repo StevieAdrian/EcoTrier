@@ -1,16 +1,30 @@
-import { ReactNode } from "react";
-import { View, Text } from "react-native";
+import { TouchableOpacity, Text, ActivityIndicator } from "react-native";
 
-interface actionProp {
-    children: ReactNode;
+interface ActionButtonProps {
+  children: string;
+  onPress: () => void;
+  disabled?: boolean;
 }
 
-export default function ActionButton(props: actionProp) {
-    const { children } = props;
-    
-    return (
-        <View style={{ backgroundColor: "black", borderRadius: 22, padding: 20, width: "90%", alignSelf: "center", marginTop: 12 }}>
-            <Text style={{ color: "white", fontSize: 20, fontWeight: 800, textAlign: "center", letterSpacing: 3}}>{children}</Text>
-        </View>
-    )
+export default function ActionButton({ children, onPress, disabled = false }: ActionButtonProps) {
+  return (
+    <TouchableOpacity 
+      onPress={onPress} 
+      disabled={disabled}
+      style={{ 
+        backgroundColor: disabled ? '#ccc' : 'black',
+        padding: 15,
+        borderRadius: 10,
+        width: '90%',
+        alignItems: 'center',
+        marginVertical: 10
+      }}
+    >
+      {disabled ? (
+        <ActivityIndicator color="white" />
+      ) : (
+        <Text style={{ color: 'white', fontWeight: 'bold' }}>{children}</Text>
+      )}
+    </TouchableOpacity>
+  );
 }

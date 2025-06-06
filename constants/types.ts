@@ -4,14 +4,29 @@ export type RootStackParamList = {
     Home: undefined;
     AllCategories: undefined;
     ScanPage: undefined;
-    SignIn: undefined;
-    SignUp: undefined;
+    CameraScreen: undefined;
     ProfilePage: undefined;
     ScanHistory: undefined;
     AccountProfile: undefined;
     EditProfile: undefined;
-    CameraScreen: { onPhotoTaken: (photoUri: string) => void };
     ProfileForm: undefined;
+    NearbyStationMap: {
+        userLocation: {
+            latitude: number;
+            longitude: number;
+            latitudeDelta: number;
+            longitudeDelta: number;
+        };
+        recycleStations: Array<{
+            id: number;
+            name: string;
+            latitude: number;
+            longitude: number;
+        }>;
+    };
+    SignPage: undefined;
+    SignIn: undefined;
+    SignUp: undefined;
 };
 
 export interface WasteCategory {
