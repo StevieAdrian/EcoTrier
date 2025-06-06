@@ -1,7 +1,13 @@
 import React from 'react';
 import MapView, { Marker } from 'react-native-maps';
+import { RouteProp } from '@react-navigation/native';
+import { RootStackParamList } from '@/constants/types';
 
-export default function MapViewScreen({ route }) {
+type MapViewScreenProps = {
+  route: RouteProp<RootStackParamList, 'NearbyStationMap'>;
+};
+
+export default function MapViewScreen({ route }: MapViewScreenProps) {
   const { userLocation, recycleStations } = route.params;
 
   return (

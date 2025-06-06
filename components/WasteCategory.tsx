@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { View, Text, Image, FlatList, TouchableOpacity } from "react-native";
-import { NavigationProp } from "../constants/types";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "@/constants/types";
 import { WasteCategories } from "../data/wasteCategory";
-type prop = {
-    navigation: NavigationProp;
-}
 
-export default function WasteCategory({ navigation }: prop) {
+type WasteCategoryProps = {
+  navigation: NativeStackNavigationProp<RootStackParamList, 'Home'>;
+};
+
+export default function WasteCategory({ navigation }: WasteCategoryProps) {
     const [showAll, setShowAll] = useState(false);
 
     return (
