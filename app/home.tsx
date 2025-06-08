@@ -8,11 +8,10 @@ import BottomNav from "@/components/BottomNav";
 import Cards from "@/components/Cards";
 import ActionButton from "@/components/ActionButton";
 import useLocation from "@/hooks/useLocation";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "@/constants/types";
+import { NavigationProp, RootStackParamList } from "@/constants/types";
 
 type HomePageProps = {
-  navigation: NativeStackNavigationProp<RootStackParamList, 'Home'>;
+    navigation: NavigationProp;
 };
 
 export default function HomePage({ navigation }: HomePageProps) {

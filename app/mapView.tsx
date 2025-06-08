@@ -1,19 +1,24 @@
 import React from 'react';
 import MapView, { Marker } from 'react-native-maps';
-import { RouteProp } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@/constants/types';
+import { useRoute, RouteProp } from '@react-navigation/native';
 
-type MapViewScreenProps = {
-  route: RouteProp<RootStackParamList, 'NearbyStationMap'>;
+type MapViewScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'NearbyStationMap'>;
+
+type Props = {
+  navigation: MapViewScreenNavigationProp;
 };
 
-export default function MapViewScreen({ route }: MapViewScreenProps) {
+export default function MapViewScreen({ navigation }: Props) {
+  const route = useRoute<RouteProp<RootStackParamList, 'NearbyStationMap'>>();
+
   const { userLocation, recycleStations } = route.params;
 
   return (
-    <MapView style={{ flex: 1 }} region={userLocation} showsUserLocation={true}>
+    <MapView style={{ flex: 1 }} region={userLocation} showsUserLocation>
       <Marker coordinate={userLocation} title="You are here" />
-      {recycleStations.map(station => (
+      {recycleStations.map((station) => (
         <Marker
           key={station.id}
           coordinate={{ latitude: station.latitude, longitude: station.longitude }}

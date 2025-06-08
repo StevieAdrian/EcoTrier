@@ -28,7 +28,7 @@ export default function ScanPage({ navigation }: prop) {
                 <Cards />
                 
                 <TouchableOpacity onPress={openCameraScreen} style={{ width: "100%", marginTop: 15 }}>
-                    <ActionButton>Scan Now</ActionButton>
+                    <ActionButton onPress={() => {}}>Scan Now</ActionButton>
                 </TouchableOpacity>
 
                 <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", marginTop: 20}}>
@@ -37,7 +37,7 @@ export default function ScanPage({ navigation }: prop) {
                     <View style={{ flex: 0.4, height: 1, backgroundColor: "black" }} />
                 </View>
                 <TouchableOpacity onPress={pickImage}>
-                    <ActionButton>Choose From Gallery</ActionButton>
+                    <ActionButton onPress={() => {}}>Choose From Gallery</ActionButton>
                 </TouchableOpacity>
             </ScrollView>
 
