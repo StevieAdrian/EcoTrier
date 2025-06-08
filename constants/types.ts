@@ -10,6 +10,7 @@ export type RootStackParamList = {
     AccountProfile: undefined;
     EditProfile: undefined;
     ProfileForm: undefined;
+    ForgotPassword: undefined;
     NearbyStationMap: {
         userLocation: {
             latitude: number;

@@ -16,7 +16,9 @@ import EditProfile from "./editProfile";
 import AccountProfile from "@/components/AccountProfile";
 import CameraScreen from "@/components/CameraScreen";
 import ProfileForm from "@/components/ProfileForm";
+import ForgotPassword from "./forgotPassword";
 import MapViewScreen from "./mapView";
+
 
 const Stack = createNativeStackNavigator();
 
@@ -63,6 +65,7 @@ export default function Index() {
               <Stack.Screen name="SignPage" component={SignPage} options={{ headerShown: false }} />
               <Stack.Screen name="SignIn" component={SignIn}/>
               <Stack.Screen name="SignUp" component={SignUp}/>
+              <Stack.Screen name="ForgotPassword" component={ForgotPassword}/>
             </>
           )}
         </Stack.Navigator>
