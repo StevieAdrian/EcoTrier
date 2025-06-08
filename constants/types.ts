@@ -28,6 +28,14 @@ export type RootStackParamList = {
     SignPage: undefined;
     SignIn: undefined;
     SignUp: undefined;
+    ResultScreen: {
+        visible: boolean;
+        onClose: () => void;
+        image: any;
+        loading: boolean;
+        response: any;
+        error: any;
+    };
 };
 
 export interface WasteCategory {

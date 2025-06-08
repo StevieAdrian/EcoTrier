@@ -18,6 +18,7 @@ import CameraScreen from "@/components/CameraScreen";
 import ProfileForm from "@/components/ProfileForm";
 import ForgotPassword from "./forgotPassword";
 import MapViewScreen from "./mapView";
+import ResultScreen from "@/components/ResultScreen";
 
 
 const Stack = createNativeStackNavigator();

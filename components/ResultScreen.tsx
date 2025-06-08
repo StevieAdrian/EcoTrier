@@ -1,8 +1,21 @@
 import { View, Image, Text, Modal, TouchableOpacity, Animated, Easing } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useRef } from "react";
+import { NavigationProp } from "@/constants/types";
 
-export default function ResultScreen({ visible, onClose, image, loading, response, error }: any) {
+
+type prop = {
+    visible: boolean;
+    onClose: () => void;
+    image: any;
+    loading: boolean;
+    response: any;
+    error: any;
+    // navigation: NavigationProp;
+    onNavigate: () => void;
+};
+
+export default function ResultScreen({ visible, onClose, image, loading, response, error, onNavigate }: prop) {
     const slideAnim = useRef(new Animated.Value(300)).current;
     const fadeAnim = useRef(new Animated.Value(0)).current; 
 
@@ -69,7 +82,7 @@ export default function ResultScreen({ visible, onClose, image, loading, respons
 
                     <Text style={{ textAlign: "center", color: "white", marginBottom: 10, fontWeight: "700" }}>Want to know more about plastic waste?</Text>
 
-                    <TouchableOpacity style={{ backgroundColor: "white", padding: 10, borderRadius: 16, alignItems: "center" }}>
+                    <TouchableOpacity onPress={onNavigate} style={{ backgroundColor: "white", padding: 10, borderRadius: 16, alignItems: "center" }} >
                         <Text style={{ fontSize: 16, fontWeight: "800", color: "black" }}>Click Here</Text>
                     </TouchableOpacity>
                 </Animated.View>
