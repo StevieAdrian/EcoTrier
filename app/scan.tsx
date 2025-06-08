@@ -28,7 +28,7 @@ export default function ScanPage({ navigation }: prop) {
                 <Cards />
                 
                 <TouchableOpacity onPress={openCameraScreen} style={{ width: "100%", marginTop: 15 }}>
-                    <ActionButton onPress={() => {}}>Scan Now</ActionButton>
+                    <ActionButton>Scan Now</ActionButton>
                 </TouchableOpacity>
 
                 <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", marginTop: 20}}>
@@ -36,13 +36,13 @@ export default function ScanPage({ navigation }: prop) {
                     <Text style={{ marginHorizontal: 10, fontSize: 18 }}>Or</Text>
                     <View style={{ flex: 0.4, height: 1, backgroundColor: "black" }} />
                 </View>
-                <TouchableOpacity onPress={pickImage}>
-                    <ActionButton onPress={() => {}}>Choose From Gallery</ActionButton>
+                <TouchableOpacity onPress={pickImage} style={{ width: "100%" }}>
+                    <ActionButton>Choose From Gallery</ActionButton>
                 </TouchableOpacity>
             </ScrollView>
 
             {image && (
-                <ResultScreen visible={modal} onClose={() => { navigation.goBack(); setModal(false) }} image={image} loading={loading} response={response} error={error} />
+                <ResultScreen visible={modal} onClose={() => setModal(false)} onNavigate={() => {setModal(false); setTimeout(() => { navigation.navigate("AllCategories"); }, 300); }} image={image} loading={loading} response={response} error={error}/>
             )} 
             
             <BottomNav navigation={navigation} />
