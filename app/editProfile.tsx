@@ -2,7 +2,9 @@ import AvatarPicker from "@/components/AvatarPicker";
 import BottomNav from "@/components/BottomNav";
 import ProfileForm from "@/components/ProfileForm";
 import { NavigationProp } from "@/constants/types";
+import useUserData from "@/hooks/useUserData";
 import { Ionicons } from "@expo/vector-icons";
+import { useState } from "react";
 import { View, Text, TouchableOpacity, TextInput, ScrollView } from "react-native";
 
 type prop = {
@@ -10,6 +12,9 @@ type prop = {
 }
 
 export default function EditProfile({ navigation }: prop) {
+    const [imageUrl, setImageUrl] = useState("");
+    const { userData } = useUserData();
+
     return (
         <View style={{ flex: 1, alignItems: "center" }}>
             <View style={{ flexDirection: "row", alignItems: "center", width: "100%", paddingTop: 25 }}>
@@ -19,9 +24,9 @@ export default function EditProfile({ navigation }: prop) {
                 <Text style={{ fontSize: 18, fontWeight: "bold", textAlign: "center", flex: 1 }}>Edit Profile</Text>
             </View>
 
-            <AvatarPicker />
+            <AvatarPicker imageUrl={userData?.profileImage}  onChangeImage={(url) => setImageUrl(url)}/>
             <ScrollView style={{ width: "100%" }}>
-                <ProfileForm navigation={navigation}/>
+                <ProfileForm navigation={navigation} imageUrl={imageUrl}/>
             </ScrollView>
 
             <BottomNav navigation={navigation}/>

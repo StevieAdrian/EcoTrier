@@ -3,4 +3,5 @@ const cloudinary_config = {
     uploadPreset: "EcoTrier",
 };
 
+
 export default cloudinary_config;

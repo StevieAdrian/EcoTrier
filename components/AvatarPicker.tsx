@@ -1,10 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View, Text, Image, Alert, TouchableOpacity, StyleSheet } from "react-native";
 import * as ImagePicker from 'expo-image-picker';
 import { Ionicons } from "@expo/vector-icons";
+import handleUpData from "@/hooks/useCloudinary";
 
-export default function AvatarPicker() {
+interface AvatarPickerProps {
+    imageUrl?: string;
+    onChangeImage: (url: string) => void;
+}
+
+export default function AvatarPicker({ onChangeImage, imageUrl }: AvatarPickerProps) {
     const [image, setImage] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (imageUrl) {
+            setImage(imageUrl);
+        }
+    }, [imageUrl]);
 
     const pickPhoto = async (type: "camera" | "gallery") => {
         let result: ImagePicker.ImagePickerResult;
@@ -26,7 +38,14 @@ export default function AvatarPicker() {
         }
 
         if (!result.canceled) {
-            setImage(result.assets[0].uri);
+            const uri = result.assets[0].uri;
+            setImage(uri);
+        
+            const url = await handleUpData(uri);
+            if (url) {
+                setImage(url);
+                onChangeImage(url);
+            }
         }
     };
 

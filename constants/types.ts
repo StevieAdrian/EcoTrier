@@ -4,7 +4,10 @@ export type RootStackParamList = {
     Home: undefined;
     AllCategories: undefined;
     ScanPage: undefined;
-    CameraScreen: undefined;
+    // CameraScreen: undefined;
+    CameraScreen: {
+        onPhotoTaken: (photoUri: string) => Promise<void>;
+    };  
     ProfilePage: undefined;
     ScanHistory: undefined;
     AccountProfile: undefined;
@@ -36,6 +39,8 @@ export type RootStackParamList = {
         response: any;
         error: any;
     };
+    SignInPage: undefined;
+    Notification: undefined;
 };
 
 export interface WasteCategory {

@@ -4,12 +4,14 @@ import { NavigationProp } from "../constants/types";
 import BottomNav from "@/components/BottomNav";
 import AccountProfile from "@/components/AccountProfile";
 import ActionProfile from "@/components/ActionProfile";
+import useUserData from "@/hooks/useUserData";
 
 type prop = {
     navigation: NavigationProp;
 };
 
 export default function ProfilePage({ navigation }: prop) {
+    const { userData } = useUserData();
     return (
         <View style={{ flex: 1, backgroundColor: "white" }}>
             <ScrollView contentContainerStyle={{ paddingBottom: 90 }} showsVerticalScrollIndicator={false}>             
@@ -21,9 +23,16 @@ export default function ProfilePage({ navigation }: prop) {
                         <Text style={{ fontSize: 24, fontWeight: "bold", textAlign: "center" }}>Settings</Text>
                     </View>
 
-                    {/* temp image, will be changed to profile later */}
-                    <View style={{ width: "25%", height: 80, alignSelf: "center", marginTop: 15, borderRadius: 12, overflow: "hidden" }}>
-                        <Image source={require("@/assets/images/ads.png")} style={{ width: "100%", height: "100%" }} resizeMode="cover" />
+                    <View style={{ width: 100, height: 100, alignSelf: "center", marginTop: 15, borderRadius: 50, overflow: "hidden", backgroundColor: "#eee" }}>
+                        <Image
+                        source={
+                            userData?.profileImage
+                            ? { uri: userData.profileImage }
+                            : require("@/assets/images/ads.png")
+                        }
+                        style={{ width: "100%", height: "100%" }}
+                        resizeMode="cover"
+                        />
                     </View>
 
                     <AccountProfile navigation={navigation}/>

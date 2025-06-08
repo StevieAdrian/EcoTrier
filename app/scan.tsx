@@ -5,7 +5,7 @@ import ResultScreen from "@/components/ResultScreen";
 import { NavigationProp } from "@/constants/types";
 import useCamera from "@/hooks/useCamera";
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
 type prop = {
@@ -27,8 +27,8 @@ export default function ScanPage({ navigation }: prop) {
             <ScrollView contentContainerStyle={{ flexGrow: 1, alignItems: "center", paddingBottom: 100 }} showsVerticalScrollIndicator={false}>             
                 <Cards />
                 
-                <TouchableOpacity onPress={openCameraScreen} style={{ width: "100%", marginTop: 15 }}>
-                    <ActionButton>Scan Now</ActionButton>
+                <TouchableOpacity style={{ width: "100%", marginTop: 15 }}>
+                    <ActionButton onPress={openCameraScreen}>Scan Now</ActionButton>
                 </TouchableOpacity>
 
                 <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", marginTop: 20}}>
@@ -36,13 +36,13 @@ export default function ScanPage({ navigation }: prop) {
                     <Text style={{ marginHorizontal: 10, fontSize: 18 }}>Or</Text>
                     <View style={{ flex: 0.4, height: 1, backgroundColor: "black" }} />
                 </View>
-                <TouchableOpacity onPress={pickImage} style={{ width: "100%" }}>
-                    <ActionButton>Choose From Gallery</ActionButton>
+                <TouchableOpacity style={{ width: "100%" }}>
+                    <ActionButton onPress={pickImage}>Choose From Gallery</ActionButton>
                 </TouchableOpacity>
             </ScrollView>
 
             {image && (
-                <ResultScreen visible={modal} onClose={() => setModal(false)} onNavigate={() => {setModal(false); setTimeout(() => { navigation.navigate("AllCategories"); }, 300); }} image={image} loading={loading} response={response} error={error}/>
+                <ResultScreen visible={modal} onClose={() => {setModal(false); navigation.goBack();}} onNavigate={() => {setModal(false); setTimeout(() => { navigation.navigate("AllCategories"); }, 300); }} image={image} loading={loading} response={response} error={error}/>
             )} 
             
             <BottomNav navigation={navigation} />

@@ -34,7 +34,7 @@ export default function SignUp({ navigation }: prop) {
             });
 
             alert('Check your emails!');
-            router.replace('/');
+            router.replace('/SignInPage');
         } catch (e: any) {
             const err = e as FirebaseError;
             alert('Registration failed: ' + err.message);
@@ -67,11 +67,11 @@ export default function SignUp({ navigation }: prop) {
                 <Text style={{ fontWeight: "bold", color: "blue" }} onPress={() => navigation.navigate("SignIn")}>Login</Text>
             </Text>
 
-            <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", marginTop: 20}}>
+            {/* <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", marginTop: 20}}>
                 <View style={{ flex: 0.4, height: 1, backgroundColor: "black" }} />
                 <Text style={{ marginHorizontal: 10, fontSize: 18 }}>Or</Text>
                 <View style={{ flex: 0.4, height: 1, backgroundColor: "black" }} />
-            </View>
+            </View> */}
         </View>
     );
 };

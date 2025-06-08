@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, Text, StyleSheet, ActivityIndicator, Modal, FlatList } from "react-native";
+import { View, TouchableOpacity, Text, StyleSheet, ActivityIndicator, Modal, FlatList, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import TextInputField from "@/components/TextInputField";
 import useUserData from "@/hooks/useUserData";
@@ -9,15 +9,17 @@ import { NavigationProp } from "@/constants/types";
 
 type prop = {
     navigation: NavigationProp;
+    imageUrl?: string;
 }
 
-export default function ProfileForm({ navigation }: prop) {
+export default function ProfileForm({ navigation, imageUrl }: prop) {
     const { userData, loading } = useUserData();
     const [formData, setFormData] = useState({
         name: "",
         email: "",
         dob: "",
         country: "",
+
     })
     const { updateProfile } = useUpdateProfile();
     const [modal, setModal] = useState(false); 
@@ -42,7 +44,8 @@ export default function ProfileForm({ navigation }: prop) {
     }
 
     function handleSave() {
-        updateProfile({name: formData.name, country: formData.country}).then(() => {
+        console.log("imageUrl:", imageUrl);
+        updateProfile({name: formData.name, country: formData.country, profileImage: imageUrl}).then(() => {
             setModal(true);
         });
     }
@@ -87,6 +90,7 @@ function DropdownField({ label, value, onSelect, disabled = false }: { label: st
     const [modal, setModal] = useState(false);
     const [dropdown, setDropdown] = useState(false);
     const [country, setCountry] = useState(value);
+    
 
     useEffect(() => {
             setCountry(value);
@@ -102,15 +106,12 @@ function DropdownField({ label, value, onSelect, disabled = false }: { label: st
 
             {dropdown && (
                 <View style={styles.dropdown}>
-                    <FlatList
-                        data={countries}
-                        keyExtractor={(item) => item.id.toString()}
-                        renderItem={({ item }) => (
-                            <TouchableOpacity style={styles.dropdownItem} onPress={() => { onSelect?.(item.name); setDropdown(false); }}>
-                                <Text>{item.name}</Text>
-                            </TouchableOpacity>
-                        )}
-                    />
+                    <ScrollView nestedScrollEnabled keyboardShouldPersistTaps="handled"> 
+                        {countries.map((item) => (
+                            <TouchableOpacity key={item.id} style={styles.dropdownItem} onPress={() => { onSelect?.(item.name); setDropdown(false);}} >
+                            <Text>{item.name}</Text> </TouchableOpacity>
+                        ))}
+                    </ScrollView>
                 </View>
             )}
         </View>

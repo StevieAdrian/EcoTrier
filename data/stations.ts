@@ -6,18 +6,28 @@ export interface Station {
 }
 
 export const generateNearbyStations = (userLat: number, userLng: number): Station[] => {
+
+  const binusLat = -6.2014;
+  const binusLng = 106.7826;
+
   return [
     {
       id: 1,
-      name: 'Bank Sampah Induk',
-      latitude: userLat + 0.001,
-      longitude: userLng + 0.001,
+      name: 'EcoStation Binus',
+      latitude: binusLat,
+      longitude: binusLng
     },
     {
       id: 2,
-      name: 'TPS 3R',
-      latitude: userLat - 0.0015,
-      longitude: userLng - 0.0012,
+      name: 'Green Point Anggrek',
+      latitude: binusLat + 0.0004,
+      longitude: binusLng + 0.0004
+    },
+    {
+      id: 3,
+      name: 'Recycle Hub Binus',
+      latitude: binusLat - 0.0005,
+      longitude: binusLng - 0.0004
     }
   ];
-}; 
+};

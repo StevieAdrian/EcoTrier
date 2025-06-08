@@ -19,6 +19,8 @@ import ProfileForm from "@/components/ProfileForm";
 import ForgotPassword from "./forgotPassword";
 import MapViewScreen from "./mapView";
 import ResultScreen from "@/components/ResultScreen";
+import SignInPage from "./SignInPage";
+import Notification from "./notification";
 
 
 const Stack = createNativeStackNavigator();
@@ -60,6 +62,8 @@ export default function Index() {
               <Stack.Screen name="EditProfile" component={EditProfile} />
               <Stack.Screen name="ProfileForm" component={ProfileForm} />
               <Stack.Screen name="NearbyStationMap" component={MapViewScreen} />
+              <Stack.Screen name="SignInPage" component={SignInPage} />
+              <Stack.Screen name="Notification" component={Notification} />
             </>
           ) : (
             <>

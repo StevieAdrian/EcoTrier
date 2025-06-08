@@ -21,7 +21,7 @@ export default function AccountProfile({ navigation }: prop){
                     <Text style={styles.text}>Security</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.container}>
+                <TouchableOpacity style={styles.container} onPress={() => navigation.navigate("Notification")}>
                     <Ionicons name="notifications-outline" size={24} color="black" />
                     <Text style={styles.text}>Notifications</Text>
                 </TouchableOpacity>

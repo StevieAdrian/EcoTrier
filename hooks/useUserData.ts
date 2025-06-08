@@ -3,7 +3,7 @@ import { auth, db } from "@/constants/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 
 export default function useUserData() {
-    const [userData, setUserData] = useState<{ name: string; email: string; dob: string; country: string } | null>(null);
+    const [userData, setUserData] = useState<{ name: string; email: string; dob: string; country: string, profileImage?: string; } | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -24,6 +24,7 @@ export default function useUserData() {
                         email: data.email || "",
                         dob,
                         country: data.country || "",
+                        profileImage: data.profileImage || "",
                     });
                 }
             }
