@@ -3,12 +3,14 @@ import { View, TouchableOpacity, Image } from "react-native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { useRoute } from "@react-navigation/native";
 import { NavigationProp } from "@/constants/types";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "@/constants/types";
 
-type prop = {
-    navigation: NavigationProp;
-}
+type BottomNavProps = {
+  navigation: NativeStackNavigationProp<RootStackParamList>;
+};
 
-export default function BottomNav({ navigation }: prop) {
+export default function BottomNav({ navigation }: BottomNavProps) {
     const route = useRoute();
 
     const activeButt = (currScreen: string[]) => {
