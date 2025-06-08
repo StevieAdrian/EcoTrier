@@ -26,6 +26,7 @@ export default function AccountProfile({ navigation }: prop){
                     <Text style={styles.text}>Notifications</Text>
                 </TouchableOpacity>
             </View>
+            
         </View>
     )
 }
@@ -43,3 +44,6 @@ const styles = {
         fontWeight: 600 as const
     },
 };
+
+
+
