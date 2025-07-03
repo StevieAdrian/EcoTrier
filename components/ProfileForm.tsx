@@ -3,10 +3,15 @@ import { Ionicons } from "@expo/vector-icons";
 import TextInputField from "@/components/TextInputField";
 import useUserData from "@/hooks/useUserData";
 import { useEffect, useState } from "react";
-import { Picker } from "@react-native-picker/picker";
 import { countries } from "@/data/countries";
+import { useUpdateProfile } from "@/hooks/useUpdateProfile";
+import { NavigationProp } from "@/constants/types";
 
-export default function ProfileForm() {
+type prop = {
+    navigation: NavigationProp;
+}
+
+export default function ProfileForm({ navigation }: prop) {
     const { userData, loading } = useUserData();
     const [formData, setFormData] = useState({
         name: "",
@@ -14,6 +19,8 @@ export default function ProfileForm() {
         dob: "",
         country: "",
     })
+    const { updateProfile } = useUpdateProfile();
+    const [modal, setModal] = useState(false); 
 
     useEffect(() => {
         if (userData){
@@ -34,6 +41,12 @@ export default function ProfileForm() {
         );
     }
 
+    function handleSave() {
+        updateProfile({name: formData.name, country: formData.country}).then(() => {
+            setModal(true);
+        });
+    }
+
     return (
         <View style={styles.container}>
             <TextInputField label="Name" value={formData.name} onChangeText={(q) => setFormData({...formData, name: q})}/>
@@ -41,9 +54,20 @@ export default function ProfileForm() {
             <DropdownField label="Date of Birth" value={formData.dob} disabled />
             <DropdownField label="Country/Region" value={formData.country} onSelect={(q) => setFormData({...formData, country: q})} />
 
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={handleSave}>
                 <Text style={styles.buttonText}>Save changes</Text>
             </TouchableOpacity>
+
+            <Modal visible={modal} animationType="fade" transparent={true} onRequestClose={() => setModal(false)}>
+                <View style={styles.modalContainer}>
+                    <View style={styles.modalContent}>
+                        <Text style={styles.modalText}>Profile updated successfully!</Text>
+                        <TouchableOpacity style={styles.modalButton} onPress={() => {setModal(false); navigation.navigate("Home")}}>
+                            <Text style={styles.modalButtonText}>OK</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
         </View>
     );
 }
@@ -82,13 +106,7 @@ function DropdownField({ label, value, onSelect, disabled = false }: { label: st
                         data={countries}
                         keyExtractor={(item) => item.id.toString()}
                         renderItem={({ item }) => (
-                            <TouchableOpacity 
-                                style={styles.dropdownItem} 
-                                onPress={() => {
-                                    onSelect?.(item.name);
-                                    setDropdown(false);
-                                }}
-                            >
+                            <TouchableOpacity style={styles.dropdownItem} onPress={() => { onSelect?.(item.name); setDropdown(false); }}>
                                 <Text>{item.name}</Text>
                             </TouchableOpacity>
                         )}
@@ -162,4 +180,34 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: "#ddd",
     },  
+    modalContainer: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "rgba(0,0,0,0.5)",
+    },
+    modalContent: {
+        backgroundColor: "white",
+        padding: 20,
+        borderRadius: 10,
+        alignItems: "center",
+    },
+    modalText: {
+        fontSize: 16,
+        marginBottom: 10,
+        fontWeight: "bold",
+    },
+    modalButton: {
+        backgroundColor: "black",
+        marginTop: 10,
+        paddingVertical: 10, 
+        paddingHorizontal: 30, 
+        borderRadius: 5,
+        minWidth: 100, 
+        alignItems: "center",
+    },
+    modalButtonText: {
+        color: "white",
+        fontWeight: "bold",
+    },
 });

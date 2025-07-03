@@ -21,7 +21,7 @@ export default function EditProfile({ navigation }: prop) {
 
             <AvatarPicker />
             <ScrollView style={{ width: "100%" }}>
-                <ProfileForm />
+                <ProfileForm navigation={navigation}/>
             </ScrollView>
 
             <BottomNav navigation={navigation}/>
